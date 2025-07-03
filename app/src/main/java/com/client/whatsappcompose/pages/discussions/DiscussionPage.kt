@@ -14,7 +14,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -52,7 +56,6 @@ fun DiscussionPage(){
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnrememberedMutableState", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DiscussionBody(){
     val scrollHorizontal = rememberScrollState()
@@ -139,7 +142,8 @@ fun DiscussionBody(){
             TypeDiscussion(id = 5, title = "+"),
         )
     }
-    Scaffold(topBar = {
+    Scaffold(
+        topBar = {
         if(discussionSelect.count() != 0){
             TopBarActionMode(discussionSelect.count(), onclick = {
                 discussionSelect.clear()
@@ -169,7 +173,13 @@ fun DiscussionBody(){
                 }
             })
         }
-    }) {
+    },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {}, containerColor = bagdeColor) {
+                Icon(painter = painterResource(R.drawable.mailplus), contentDescription = "icon message", tint = Color.White, modifier = Modifier.size(25.dp))
+            }
+        }
+    ) {
         discussionChannel.forEach {discussion ->
             val nomlues: Boolean = discussionChannelNonLue.contains(element = discussion)
             val data = discussion.listConversation.filter { conversation ->
@@ -182,7 +192,7 @@ fun DiscussionBody(){
             }
         }
         Column(modifier = Modifier.fillMaxSize().verticalScroll(scrollVertical)) {
-            Spacer(Modifier.height(90.dp))
+            Spacer(Modifier.height(120.dp))
             Row(modifier = Modifier.horizontalScroll(scrollHorizontal).fillMaxWidth()) {
                 Spacer(Modifier.width(15.dp))
                 typeDiscussionList.forEachIndexed {indice,it->
