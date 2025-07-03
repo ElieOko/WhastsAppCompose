@@ -7,22 +7,15 @@ import com.client.whatsappcompose.R
 
 object FakeData {
     val typeDiscussionList = listOf<TypeDiscussion>(
-        TypeDiscussion(id = 1, title = "Toutes", true),
-        TypeDiscussion(id = 2, title = "Non lues plus de "),
+        TypeDiscussion(id = 1, title = "Toutes",),
+        TypeDiscussion(id = 2, title = "Non lues plus de ", true),
         TypeDiscussion(id = 3, title = "Favoris"),
         TypeDiscussion(id = 4, title = "Groupes"),
         TypeDiscussion(id = 5, title = "+"),
     )
 
     val discussion = listOf<Conversation>(
-        Conversation(
-            id = 1,
-            userSendTo = User(id = 1, username = "Kedy "),
-            userReceiveTo = User(id = 2, username = "Hilaire", profil = R.drawable.hilaire),
-            message = "Lobi nako...",
-            time = "22:10",
-            status = true
-        ),
+
         Conversation(
             id = 2,
             userSendTo = User(id = 1, username = "Kedy "),
@@ -32,10 +25,25 @@ object FakeData {
         ),
         Conversation(
             id = 3,
-            userSendTo = User(id = 1, username = "Kedy "),
+            userSendTo = User(id = 1, username = "Kedy"),
             userReceiveTo = User(id = 3, username = "Gedeon", profil = R.drawable.gedeon),
             message = "Bonjour position...",
             time = "19:45"
         ),
+        Conversation(
+            id = 4,
+            userSendTo = User(id = 4, username = "Terence", profil = R.drawable.hilaire),
+            userReceiveTo = User(id = 1, username = "Kedy"),
+            message = "Jambo",
+            time = "15:10"
+        ),
+        Conversation(
+            id = 5,
+            userSendTo = User(id = 4, username = "Terence", profil = R.drawable.hilaire),
+            userReceiveTo = User(id = 1, username = "Kedy"),
+            message = "Niko apa",
+            time = "15:12"
+        )
     )
+
 }
