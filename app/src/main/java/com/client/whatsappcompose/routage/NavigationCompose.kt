@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.client.whatsappcompose.pages.ParentMain
 import androidx.navigation.compose.composable
+import com.client.whatsappcompose.pages.discussions.Conversation
 
 @Composable
 fun NavigationCompose(
@@ -17,10 +18,11 @@ fun NavigationCompose(
         route = "root"
     ) {
         composable(ScreenPage.ParentMain.name){
-            ParentMain()
+            ParentMain(navHostController)
         }
-        composable(ScreenPage.Conversation.name) {
-
+        composable(ScreenPage.Conversation.name + "/{id}") {navStack->
+            val userId = navStack.arguments?.getString("id")
+            Conversation(navHostController,userId?.toInt())
         }
     }
 }
