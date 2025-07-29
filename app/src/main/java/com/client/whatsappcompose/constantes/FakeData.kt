@@ -4,6 +4,7 @@ import com.client.whatsappcompose.models.Conversation
 import com.client.whatsappcompose.models.TypeDiscussion
 import com.client.whatsappcompose.models.User
 import com.client.whatsappcompose.R
+import com.client.whatsappcompose.models.Contact
 
 object FakeData {
     val typeDiscussionList = listOf<TypeDiscussion>(
@@ -45,5 +46,12 @@ object FakeData {
             time = "15:12"
         )
     )
+    val listContact = listOf<Contact>(
+        Contact(id = 1, user = User(id = 2, username = "Hilaire", profil = R.drawable.hilaire)),
+        Contact(id = 2, user = User(id = 3, username = "Gedeon", profil = R.drawable.gedeon)),
+        Contact(id=3, user = User(id = 3, username = "David", profil = R.drawable.kedy)),
+        Contact(id = 4, user =User(id = 4, username = "Terence", profil = R.drawable.hilaire))
 
+
+    )
 }
