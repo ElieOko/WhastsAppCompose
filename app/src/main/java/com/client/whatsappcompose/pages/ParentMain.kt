@@ -8,37 +8,28 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MailOutline
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.client.whatsappcompose.models.Parent
 import com.client.whatsappcompose.R
 import com.client.whatsappcompose.models.PagerItem
@@ -49,7 +40,7 @@ import com.client.whatsappcompose.ui.theme.wsColor
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview(showBackground = true)
 @Composable
-fun ParentMain(){
+fun ParentMain(navHostController: NavHostController? = null) {
     val listParent = listOf<Parent>(
         Parent(1,"Discussions", icon = R.drawable.discussion),
         Parent(2,"Actus", icon = R.drawable.status),
@@ -60,7 +51,7 @@ fun ParentMain(){
 
 
     val childreenList = listOf(
-        PagerItem{DiscussionPage()},
+        PagerItem{DiscussionPage(navHostController) },
         PagerItem{ Text("Actus")}.dispay(),
         PagerItem{Text("Communautés")}.dispay(),
         PagerItem{Text("Appels")}.dispay()
@@ -87,25 +78,6 @@ fun ParentMain(){
     }
     Scaffold(bottomBar = {
         NavigationBar(containerColor = Color.White) {
-
-//            PrimaryTabRow(selectedTabIndex = state.intValue,){
-//                listParent.forEachIndexed{index, destination ->
-//                    Tab(selected = index == state.intValue,
-//                        onClick = {
-//                          //  navController.navigate(route = destination.route)
-//                            //selectedDestination = index
-//                            state.intValue = index
-//                        },
-//                        icon = {
-//                            Icon(painter = painterResource(destination.icon),null, modifier = Modifier.size(28.dp))
-//                        },
-//                        text = {
-//                            Text(destination.name, fontWeight = FontWeight.Bold, fontSize = 10.sp)
-//                        })
-//                }
-//
-//
-//            }
             listParent.forEachIndexed {i,parent ->
                 NavigationBarItem(
                     colors =  NavigationBarItemDefaults.colors(
@@ -127,8 +99,8 @@ fun ParentMain(){
 
         Column(modifier = Modifier.fillMaxSize()) {
             HorizontalPager(state = statePage) {index->
-                Toast.makeText(local, listParent.size.toString(),Toast.LENGTH_LONG).show()
-                CoreUi(index)
+                //Toast.makeText(local, listParent.size.toString(),Toast.LENGTH_LONG).show()
+                CoreUi(index, navHostController)
             }
             //CoreUi(state.intValue)
         }
@@ -137,9 +109,9 @@ fun ParentMain(){
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun CoreUi(state : Int){
+fun CoreUi(state: Int, navHostController: NavHostController?){
     when(state){
-        0 -> DiscussionPage()
+        0 -> DiscussionPage(navHostController)
         1 ->{
             Scaffold {
                 Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
