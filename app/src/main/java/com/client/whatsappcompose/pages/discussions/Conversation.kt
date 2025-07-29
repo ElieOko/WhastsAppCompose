@@ -53,7 +53,7 @@ fun ConversationBody(navHostController: NavHostController? = null, userId: Int? 
      val user = listContact.filter { contact ->
          contact.user.id == userId
      }[0].user
-    var value by rememberSaveable { mutableStateOf("initial value") }
+    var value by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
         topBar = {
