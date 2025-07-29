@@ -69,7 +69,7 @@ fun ConversationBody(navHostController: NavHostController? = null, userId: Int? 
 
             Row(Modifier.fillMaxWidth().padding(10.dp)) {
                 Box {
-                    BasicTextField(value = value, onValueChange = { value = it }, modifier = Modifier.width(300.dp))
+                    BasicTextField(value = value, onValueChange = { value = it }, modifier = Modifier.width(270.dp))
                     if (value.isEmpty()) {
                         Text(text = "Placeholder")
                     }
