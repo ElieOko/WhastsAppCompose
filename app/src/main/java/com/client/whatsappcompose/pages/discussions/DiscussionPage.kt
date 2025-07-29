@@ -1,6 +1,5 @@
 package com.client.whatsappcompose.pages.discussions
 
-import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
@@ -15,12 +14,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -41,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.client.whatsappcompose.R
 import com.client.whatsappcompose.composants.core.BoxDiscussion
 import com.client.whatsappcompose.composants.core.TopBarActionMode
@@ -49,17 +45,18 @@ import com.client.whatsappcompose.models.Conversation
 import com.client.whatsappcompose.models.Discussion
 import com.client.whatsappcompose.models.TypeDiscussion
 import com.client.whatsappcompose.models.User
+import com.client.whatsappcompose.routage.ScreenPage
 import com.client.whatsappcompose.ui.theme.bagdeColor
 import com.client.whatsappcompose.ui.theme.wsColor
 
 @Composable
-fun DiscussionPage(){
-    DiscussionBody()
+fun DiscussionPage(navHostController: NavHostController?) {
+    DiscussionBody(navHostController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DiscussionBody(){
+fun DiscussionBody(navHostController: NavHostController? = null) {
     val scrollHorizontal = rememberScrollState()
     val scrollVertical = rememberScrollState()
     val local = LocalContext.current
@@ -253,11 +250,12 @@ fun DiscussionBody(){
                                             discussionSelect.add(it)
                                         } else {
                                             discussionSelect.removeIf{d -> d.id == it.id}
-                                            Toast.makeText(local, discussionChannel.filter { discussion-> discussion.isSelect }.size.toString(), Toast.LENGTH_LONG).show()
+                                           // Toast.makeText(local, discussionChannel.filter { discussion-> discussion.isSelect }.size.toString(), Toast.LENGTH_LONG).show()
                                         }
                                     }
                                 } else{
-                                    Toast.makeText(local,"${it.id}", Toast.LENGTH_LONG).show()
+                                    navHostController?.navigate(route = ScreenPage.Conversation.name +"/${it.contact.user.id}")
+                                   // Toast.makeText(local,"${it.contact.user.id}", Toast.LENGTH_LONG).show()
                                 }
                             }
                         )
