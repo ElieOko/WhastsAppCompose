@@ -6,6 +6,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
@@ -174,8 +176,9 @@ fun DiscussionBody(){
             })
         }
     },
+
         floatingActionButton = {
-            FloatingActionButton(onClick = {}, containerColor = bagdeColor) {
+            FloatingActionButton(onClick = {}, containerColor = bagdeColor, modifier = Modifier.absoluteOffset(y=(-85).dp)) {
                 Icon(painter = painterResource(R.drawable.mailplus), contentDescription = "icon message", tint = Color.White, modifier = Modifier.size(25.dp))
             }
         }
@@ -192,7 +195,7 @@ fun DiscussionBody(){
             }
         }
         Column(modifier = Modifier.fillMaxSize().verticalScroll(scrollVertical)) {
-            Spacer(Modifier.height(120.dp))
+            Spacer(Modifier.height(100.dp))
             Row(modifier = Modifier.horizontalScroll(scrollHorizontal).fillMaxWidth()) {
                 Spacer(Modifier.width(15.dp))
                 typeDiscussionList.forEachIndexed {indice,it->
